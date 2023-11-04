@@ -1,4 +1,4 @@
-// C++ Implementation of Non-Preemptive Priority Scheduling Algorithm
+// Write a program to implement Priority preemptive cpu scheduling algorithm.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -16,29 +16,33 @@ bool compa(const process &p1, const process &p2)
 void calculateTime(process p[], int n, float &avg_tat, float &avg_wt)
 {
     sort(p, p + n, compa);
-    int ct[n], tat[n], wt[n], rem[n];
+    int rem[n], ct[n], tat[n], wt[n];
     for (int i = 0; i < n; i++)
     {
         rem[i] = p[i].bt;
     }
     vector<int> gantt;
-    int complete = 0, mpp = 0, t = p[0].at, priority = p[0].pr;
+    int complete = 0, mpp = 0, priority = p[0].pr, t = p[0].at;
+
     while (complete != n)
     {
         for (int i = 0; i < n; i++)
         {
-            if (t >= p[i].at and p[i].pr > priority and rem[i])
+            if (t >= p[i].at and rem[i] and priority < p[i].pr)
             {
                 priority = p[i].pr;
                 mpp = i;
             }
         }
 
-        t += rem[mpp];
-        rem[mpp] = 0;
+        t++;
+        rem[mpp]--;
         gantt.push_back(p[mpp].pid);
-        ct[mpp] = t;
-        complete++;
+        if (!rem[mpp])
+        {
+            complete++;
+            ct[mpp] = t;
+        }
         priority = INT_MIN;
     }
 
@@ -76,7 +80,7 @@ int main()
     cout << "Enter the number of processes: ";
     cin >> n;
     process p[n];
-    cout << "Enter the process id, priority, arrival time and burst time: " << endl;
+    cout << "Enter the process id, priority, arrival time, burst time: " << endl;
     for (int i = 0; i < n; i++)
     {
         cin >> p[i].pid >> p[i].pr >> p[i].at >> p[i].bt;
@@ -88,21 +92,17 @@ int main()
 
 // Terminal
 
-// Enter the number of processes: 6
-// Enter the process id, priority, arrival time and burst time:
-// 1 4 0 4
-// 2 5 1 5
-// 3 7 2 1
-// 4 2 3 2
-// 5 1 4 3
-// 6 6 5 6
-// Process sequence: 1 3 6 2 4 5
+// Enter the number of processes: 4
+// Enter the process id, priority, arrival time, burst time: 
+// 1 10 0 5
+// 2 20 1 4
+// 3 30 2 2
+// 4 40 4 1
+// Process sequence: 1 2 3 3 4 2 2 2 1 1 1 1 
 //          PID     PRT     AT      BT      TAT     WT
-//         1       4       0       4       4       0
-//         2       5       1       5       15      10
-//         3       7       2       1       3       2
-//         4       2       3       2       15      13
-//         5       1       4       3       17      14
-//         6       6       5       6       6       0
-// Avg turn around time: 10
-// Avg Waiting time: 6.5
+//         1       10      0       5       12      7
+//         2       20      1       4       7       3
+//         3       30      2       2       2       0
+//         4       40      4       1       1       0
+// Avg turn around time: 5.5
+// Avg Waiting time: 2.5
