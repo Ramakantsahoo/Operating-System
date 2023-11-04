@@ -1,7 +1,6 @@
 // Write a program to implement first come first serve cpu scheduling algorithm (FCFS) with arrival time.
 
 #include <iostream>
-#include <iomanip>
 using namespace std;
 
 int main()
