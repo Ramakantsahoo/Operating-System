@@ -40,7 +40,7 @@ int main()
 	pthread_mutex_init(&mutex, NULL);
 	sem_init(&wrt, 0, 1);
 
-	int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; // Just used for numbering producer and consumer
+	int a[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; // Just used for numbering reader and writer
 
 	for (int i = 0; i < 10; i++)
 	{
