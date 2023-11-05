@@ -1,3 +1,5 @@
+// Write a program to implement reader writer problem solution.
+
 #include<stdio.h>
 #include<semaphore.h>
 #include<pthread.h>
