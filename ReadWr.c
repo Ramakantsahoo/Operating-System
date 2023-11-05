@@ -29,7 +29,7 @@ void *reader(void *r)
 
 	pthread_mutex_lock(&mutex);
 	numReader--;
-	if (numReader == 1)
+	if (numReader == 0)
 		sem_post(&wrt);
 	pthread_mutex_unlock(&mutex);
 }
