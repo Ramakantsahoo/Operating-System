@@ -1,3 +1,5 @@
+// Write a program to implement Bankers algorithm for safe state
+
 #include <iostream>
 using namespace std;
 
