@@ -101,7 +101,7 @@ int main()
     cout << "Enter the number of processes: ";
     cin >> n;
     process p[n];
-    cout << "Enter the process id, priority, arrival time and burst time: " << endl;
+    cout << "Enter the process id, arrival time and burst time: " << endl;
     for (int i = 0; i < n; i++)
     {
         cin >> p[i].pid >> p[i].at >> p[i].bt;
@@ -117,7 +117,7 @@ int main()
 // Terminal
 
 // Enter the number of processes: 4
-// Enter the process id, priority, arrival time and burst time:
+// Enter the process id, arrival time and burst time:
 // 1 0 5
 // 2 1 4
 // 3 2 2
